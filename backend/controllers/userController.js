@@ -17,6 +17,32 @@ const getUsers = async (req, res) => {
     else
        res.json(users);
 };
+//update user details
+const updateUser = async (req, res)=>{
+  const token = req.params.token;
+  const decoed = jwt.verify(token,process.env.JWT_SECRET)
+  const {userId:id} = decoed;
+  // return;
+  const {email,name} = req.body;
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+
+    res.send("Id is not valid")
+  }else{
+   const user = await User.findById(id); 
+  
+   if(!user)
+    res.send("User not found")
+  else{
+      user.email = email;
+      user.name = name;
+     const newUser = await user.save();
+    res.status(201).json({ success : true, message: "User Updated successfully", newUser });
+  }
+}
+}
+   
+   
 
 const createUser = async (req, res) => {
       // console.log(req.body);
@@ -54,6 +80,8 @@ const createUser = async (req, res) => {
 async function checkUser(req, res){
 
   const { email, password } = req.body;
+  // console.log(req.body);
+  // return;
   
   if(email && password){
      try {
@@ -68,7 +96,7 @@ async function checkUser(req, res){
 
        res.json({success: true,message:"Login success",token})
       }else{
-      //  res.json({success:false, message:"Login Failed"})
+       res.json({success:false, message:"Login Failed"})
       }
      } catch (error) {
         console.log(error)
@@ -99,4 +127,4 @@ const aboutPage = (req, res)=>{
   res.json({message: "This is about page"})
 }
 
-module.exports = { getUsers, createUser, getUserById, checkUser, aboutPage };
+module.exports = {updateUser, getUsers, createUser, getUserById, checkUser, aboutPage };

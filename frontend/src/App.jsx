@@ -2,6 +2,8 @@ import RegisterForm from "./RegisterForm";
 import { Routes, Route } from 'react-router';
 import LoginForm from './LoginForm'
 import About from "./About";
+import UpdateRegister from "./UpdateRegister"
+
 
 
 function App() {
@@ -11,6 +13,7 @@ function App() {
             <Route path="/" element={<RegisterForm />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/about" element={<About />} />
+            <Route path="/update" element={<UpdateRegister />} />
          </Routes>
 
     

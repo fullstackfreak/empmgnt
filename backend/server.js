@@ -27,21 +27,21 @@ app.use(cors({
      "methods": "GET,HEAD,PUT,PATCH,POST,DELETE"
 }))
 
-app.get("/", (req, res)=>{
-   let tagline = "No programming concept is complete without a cute animal mascot.";
-    // res.render("index")
-    const users = [
-       { name : "manoj", place: "kochi"},
-       { name : "sunil", place: "tvm"},
-    ]
-    res.render("index",{users})
-})
-app.get("/contact",(req, res)=>{
-    let age = 22;
-    res.render("contact", {age})
-})
+// app.get("/", (req, res)=>{
+//    let tagline = "No programming concept is complete without a cute animal mascot.";
+//     // res.render("index")
+//     const users = [
+//        { name : "manoj", place: "kochi"},
+//        { name : "sunil", place: "tvm"},
+//     ]
+//     res.render("index",{users})
+// })
+// app.get("/contact",(req, res)=>{
+//     let age = 22;
+//     res.render("contact", {age})
+// })
 
-// app.use("/", userRouter);
+app.use("/", userRouter);
 
 // app.use("/post", postRoute)
 
